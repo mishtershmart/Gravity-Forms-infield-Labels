@@ -11,7 +11,7 @@
  * support for in-field labels for Gravity Forms.
  *
  * Be warned, this will remove all labels and add in-field labels
- * instead. Specifying a class of "no-labelfy" on your input will
+ * instead. Specifying a class of "no-labelfyCustom" on your input will
  * stop this plugin removing the label and adding an in-field one.
  *
  */
@@ -27,5 +27,5 @@ add_action("gform_enqueue_scripts", "add_infield_labels_for_gf", 10, 2);
  */
 function add_infield_labels_for_gf($form, $is_ajax) {
 	// Enqueue the script baby
-	wp_enqueue_script("labelfy", PLUGIN_DIR . "labelfy.js",array('jquery'));
+	wp_enqueue_script("labelfyCustom", PLUGIN_DIR . "labelfyCustom.js",array('jquery'));
 }
