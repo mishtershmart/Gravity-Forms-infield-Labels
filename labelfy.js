@@ -16,10 +16,12 @@
 	
 	$.fn.labelfy = function(options) {
 
-		var settings = $.extend({
-			'focusClass' : 'input-focused',
-			'blurClass'  : 'input-blurred'
-		}, options);
+        var settings = $.extend(
+            {
+                'placeHolderClass' : 'input-placeholder',
+                'focusClass'       : 'input-focused',
+                'blurClass'        : 'input-blurred'
+            }, options);
 
 		return this.each(function() {
 
@@ -75,15 +77,18 @@
 							// Remove the label, it's not needed any more
 							label.remove();
 
+                            // Add the initial placeholder class
+                            theInput.addClass(settings.placeHolderClass);
+
 							// Set the value of our input to be that of the label text
 							theInput.val(labelText);
 
 							// If the user focuses their mouse into the field
 							theInput.on("focus", function() {
 								// Add our classes
-								theInput.removeClass(settings.blurClass).addClass(settings.focusClass);
+								theInput.removeClass(settings.blurClass).removeClass(settings.placeHolderClass).addClass(settings.focusClass);
 
-								// If the vlaues match, clear
+								// If the values match, clear
 								if (theInput.val() == labelText) {
 
 									// Empty value
@@ -100,6 +105,7 @@
 								if (theInput.val() == '') {
 									// Repopulate with the label value
 									theInput.val(labelText);
+                                    theInput.addClass(settings.placeHolderClass);
 								}
 							});
 
