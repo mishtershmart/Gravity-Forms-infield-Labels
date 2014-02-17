@@ -14,14 +14,7 @@
 	 *
 	 */
 	
-	$.fn.labelfy = function(options) {
-
-        var settings = $.extend(
-            {
-                'placeHolderClass' : 'input-placeholder',
-                'focusClass'       : 'input-focused',
-                'blurClass'        : 'input-blurred'
-            }, options);
+	$.fn.labelfy = function() {
 
 		return this.each(function() {
 
@@ -47,8 +40,8 @@
 				var forAttr = label.attr('for');
 
 				// If we have a for attribute value
-				if (typeof forAttr !== 'undefined') {
-
+				if (typeof forAttr !== 'undefined')
+                {
 					// Find the element this label is for
 					var theInput = $("#" + forAttr);
 
@@ -59,65 +52,33 @@
 					var theParent = theInput.parents('form');
 
 					// The input doesn't exist, do a look up by name
-					if (!theInput) {
+					if (!theInput)
+                    {
 						// Maybe the user opted for name attributes instead of an ID?
 						var inputSearchlight = $("input[name='"+forAttr+"'], textarea[name='"+forAttr+"']");
 
 						// The user has correctly added name values without ID's no big deal.
-						if (inputSearchlight) {
+						if (inputSearchlight)
 							theInput = inputSearchlight;
-						}
+
 					}
 
 					// If the form has a class of no-labelfy, don't bother
-					if (!theParent.hasClass('no-labelfy')) {
+					if (!theParent.hasClass('no-labelfy'))
+                    {
 						// Our element has passed the test
-						if (isValidInput(theInput)) {
-
+						if (isValidInput(theInput))
+                        {
 							// Remove the label, it's not needed any more
 							label.remove();
 
-                            // Add the initial placeholder class
-                            theInput.addClass(settings.placeHolderClass);
+							// Set the placeholder of our input to be that of the label text
+							theInput.attr('placeholder', labelText);
 
-							// Set the value of our input to be that of the label text
-							theInput.val(labelText);
+                            // If the placeholder support function exists, use it for back support
+                            if ( $.isFunction($.fn.placeholder) )
+                                theInput.placeholder();
 
-							// If the user focuses their mouse into the field
-							theInput.on("focus", function() {
-								// Add our classes
-								theInput.removeClass(settings.blurClass).removeClass(settings.placeHolderClass).addClass(settings.focusClass);
-
-								// If the values match, clear
-								if (theInput.val() == labelText) {
-
-									// Empty value
-									theInput.val("");
-								}
-							});
-
-							// When the users leaves the text field
-							theInput.on("blur", function() {
-								// Add our classes
-								theInput.addClass(settings.blurClass).removeClass(settings.focusClass);
-
-								// Is the label empty?
-								if (theInput.val() == '') {
-									// Repopulate with the label value
-									theInput.val(labelText);
-                                    theInput.addClass(settings.placeHolderClass);
-								}
-							});
-
-							// If the parent form submits and our default value is there
-							theParent.on("submit", function() {
-
-								// We don't want our default value tricking form validation
-								if (theInput.val() == labelText) {
-									// Empty the field
-									theInput.val("");
-								}
-							});
 						}
 					}
 
