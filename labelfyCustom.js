@@ -1,9 +1,14 @@
 ;(function($) {
 
 	// Document ready
-	$(function() {
-		$(".gform_wrapper form").labelfyCustom();
-	});
+//	$(function() {
+//		$(".gform_wrapper form").labelfyCustom();
+//	});
+
+    $(document).on('ready gform_post_render', function()
+    {
+        $('.gform_wrapper form').labelfyCustom();
+    });
 
 	/**
 	 * Labelfy
