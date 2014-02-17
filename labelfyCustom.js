@@ -2,7 +2,7 @@
 
 	// Document ready
 	$(function() {
-		$(".gform_wrapper form").labelfy();
+		$(".gform_wrapper form").labelfyCustom();
 	});
 
 	/**
@@ -14,7 +14,7 @@
 	 *
 	 */
 	
-	$.fn.labelfy = function() {
+	$.fn.labelfyCustom = function() {
 
 		return this.each(function() {
 
@@ -63,8 +63,8 @@
 
 					}
 
-					// If the form has a class of no-labelfy, don't bother
-					if (!theParent.hasClass('no-labelfy'))
+					// If the form has a class of show-labels, don't bother
+					if (!theParent.hasClass('show-labels'))
                     {
 						// Our element has passed the test
 						if (isValidInput(theInput))
@@ -90,13 +90,13 @@
 			 *
 			 * Checks if a supplied value is a valid input we can create our faux
 			 * placeholder on. Checks for fields that aren't hidden mostly, but also
-			 * ensures that the "no-labelfy" class hasn't been added to our input.
+			 * ensures that the "no-labelfyCustom" class hasn't been added to our input.
 			 *
 			 */
 			function isValidInput(input) {
 
-				// If our input an an input or textarea and we want to labelfy, proceed
-				if (input.is('input') || input.is('textarea') && !input.hasClass('no-labelfy')) {
+				// If our input an an input or textarea and we want to labelfyCustom, proceed
+				if (input.is('input') || input.is('textarea') && !input.hasClass('no-labelfyCustom')) {
 
 					// Is this an input only? Check it's valid
 					if (input.is('input')) {
