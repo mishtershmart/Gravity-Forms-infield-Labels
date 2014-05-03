@@ -7,7 +7,8 @@
 
     $(document).on('ready gform_post_render', function()
     {
-        $('.gform_wrapper form').labelfyCustom();
+        //$('.gform_wrapper form').labelfyCustom();
+        $('.label-to-placeholder').labelfyCustom();
     });
 
 	/**
